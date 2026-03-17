@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Paulo Korel - Portfólio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,10,0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+header img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+header h1 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* GRID */
+.gallery {
+  column-count: 4;
+  column-gap: 12px;
+  padding: 12px;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.item img, .item video {
+  width: 100%;
+  display: block;
+  transition: 0.4s ease;
+}
+
+/* HOVER */
+.item:hover img,
+.item:hover video {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVO */
+@media (max-width: 1000px) {
+  .gallery { column-count: 3; }
+}
+
+@media (max-width: 700px) {
+  .gallery { column-count: 2; }
+}
+
+@media (max-width: 500px) {
+  .gallery { column-count: 1; }
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.85);
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.overlay-content {
+  display: flex;
+  gap: 30px;
+  max-width: 1100px;
+  width: 100%;
+  align-items: center;
+}
+
+.overlay img, .overlay video, .overlay iframe {
+  max-width: 60%;
+  border-radius: 12px;
+}
+
+.description {
+  max-width: 40%;
+}
+
+.description h2 {
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* MOBILE OVERLAY */
+@media (max-width: 700px) {
+  .overlay-content {
+    flex-direction: column;
+  }
+
+  .overlay img, .overlay video, .overlay iframe {
+    max-width: 100%;
+  }
+
+  .description {
+    max-width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="perfil.jpg" alt="Perfil">
+  <h1>Paulo Korel - O Poder da Imagem & Som</h1>
+</header>
+
+<div class="gallery">
+
+  <!-- IMAGEM -->
+  <div class="item" onclick="openOverlay('img1.jpg','Sessão de fotos guitarra')">
+    <img src="img1.jpg" loading="lazy">
+  </div>
+
+  <!-- IMAGEM -->
+  <div class="item" onclick="openOverlay('img2.jpg','Estúdio criativo')">
+    <img src="img2.jpg" loading="lazy">
+  </div>
+
+  <!-- VÍDEO LOCAL (evite pesado) -->
+  <div class="item" onclick="openOverlay('video.mp4','Performance ao vivo', true)">
+    <video src="video.mp4" muted></video>
+  </div>
+
+  <!-- YOUTUBE (RECOMENDADO) -->
+  <div class="item" onclick="openOverlay('https://www.youtube.com/embed/SEU_VIDEO','Cover guitarra', 'youtube')">
+    <img src="thumb.jpg" loading="lazy">
+  </div>
+
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay">
+  <span class="close" onclick="closeOverlay()">×</span>
+  <div class="overlay-content" id="overlayContent"></div>
+</div>
+
+<script>
+function openOverlay(src, text, type=false) {
+  const container = document.getElementById("overlayContent");
+
+  let media = "";
+
+  if(type === true){
+    media = `<video src="${src}" controls autoplay></video>`;
+  } else if(type === 'youtube'){
+    media = `<iframe src="${src}" frameborder="0" allowfullscreen></iframe>`;
+  } else {
+    media = `<img src="${src}">`;
+  }
+
+  container.innerHTML = `
+    ${media}
+    <div class="description">
+      <h2>Projeto</h2>
+      <p>${text}</p>
+    </div>
+  `;
+
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function closeOverlay() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>
