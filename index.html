@@ -158,47 +158,47 @@ header h1 {
     <img src="Artboard 1.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(1)">
     <img src="Artboard 2.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(2)">
     <img src="Artboard 3.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(3)">
     <img src="Artboard 4.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(4)">
     <img src="Artboard 5.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(5)">
     <img src="Artboard 6.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(6)">
   <img src="Artboard 7.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(7)">
     <img src="Artboard 8.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(8)">
     <img src="Artboard 9.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(9)">
     <img src="Artboard 10.jpg" loading="lazy">
   </div>
 
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay(10)">
     <img src="Artboard 11.jpg" loading="lazy">
   </div>
   
-  <div class="item" onclick="openOverlay(0)">
+  <div class="item" onclick="openOverlay('11')">
     <img src="Artboard 12.jpg" loading="lazy">
   </div>
 
@@ -265,12 +265,14 @@ function closeOverlay() {
 }
 
 function nextItem() {
-  currentIndex = (currentIndex + 1) % items.length;
+  currentIndex++;
+  if(currentIndex >= items.length) currentIndex = 0;
   renderOverlay();
 }
 
 function prevItem() {
-  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  currentIndex--;
+  if(currentIndex < 0) currentIndex = items.length - 1;
   renderOverlay();
 }
 
