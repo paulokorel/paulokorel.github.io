@@ -1,9 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Paulo Korel - Portfólio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -27,7 +27,6 @@ header {
   gap: 15px;
   padding: 15px 20px;
   z-index: 10;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 header img {
@@ -39,7 +38,6 @@ header img {
 
 header h1 {
   font-size: 16px;
-  font-weight: 500;
 }
 
 /* GRID */
@@ -53,17 +51,16 @@ header h1 {
   break-inside: avoid;
   margin-bottom: 12px;
   cursor: pointer;
-  overflow: hidden;
   border-radius: 12px;
+  overflow: hidden;
 }
 
 .item img, .item video {
   width: 100%;
   display: block;
-  transition: 0.4s ease;
+  transition: 0.4s;
 }
 
-/* HOVER */
 .item:hover img,
 .item:hover video {
   transform: scale(1.05);
@@ -73,11 +70,9 @@ header h1 {
 @media (max-width: 1000px) {
   .gallery { column-count: 3; }
 }
-
 @media (max-width: 700px) {
   .gallery { column-count: 2; }
 }
-
 @media (max-width: 500px) {
   .gallery { column-count: 1; }
 }
@@ -91,16 +86,10 @@ header h1 {
   height: 100%;
   display: none;
   backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.9);
   align-items: center;
   justify-content: center;
   padding: 40px;
-  animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
 }
 
 .overlay-content {
@@ -120,10 +109,6 @@ header h1 {
   max-width: 40%;
 }
 
-.description h2 {
-  margin-bottom: 10px;
-}
-
 .close {
   position: absolute;
   top: 20px;
@@ -132,97 +117,126 @@ header h1 {
   cursor: pointer;
 }
 
-/* MOBILE OVERLAY */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  cursor: pointer;
+  color: white;
+}
+
+.left { left: 20px; }
+.right { right: 20px; }
+
+/* MOBILE */
 @media (max-width: 700px) {
   .overlay-content {
     flex-direction: column;
   }
-
   .overlay img, .overlay video, .overlay iframe {
     max-width: 100%;
   }
-
   .description {
     max-width: 100%;
   }
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
-  <img src="perfil.jpg" alt="Perfil">
+  <img src="images/perfil.jpg">
   <h1>Paulo Korel - O Poder da Imagem & Som</h1>
 </header>
 
 <div class="gallery">
 
-  <!-- IMAGEM -->
-  <div class="item" onclick="openOverlay('Artboard 1.jpg','Ensaio Urbano - Praça Roosevelt')">
-    <img src="Artboard 1.jpg" loading="lazy">
+  <div class="item" onclick="openOverlay(0)">
+    <img src="images/img1.jpg" loading="lazy">
   </div>
 
-  <!-- IMAGEM -->
-  <div class="item" onclick="openOverlay('img2.jpg','Estúdio criativo')">
-    <img src="img2.jpg" loading="lazy">
+  <div class="item" onclick="openOverlay(1)">
+    <img src="images/img2.jpg" loading="lazy">
   </div>
 
-  <!-- VÍDEO LOCAL (evite pesado) -->
-  <div class="item" onclick="openOverlay('video.mp4','Performance ao vivo', true)">
-    <video src="video.mp4" muted></video>
+  <div class="item" onclick="openOverlay(2)">
+    <video src="videos/video.mp4" muted></video>
   </div>
 
-  <!-- YOUTUBE (RECOMENDADO) -->
-  <div class="item" onclick="openOverlay('https://www.youtube.com/embed/SEU_VIDEO','Cover guitarra', 'youtube')">
-    <img src="thumb.jpg" loading="lazy">
+  <div class="item" onclick="openOverlay(3)">
+    <img src="images/thumb.jpg" loading="lazy">
   </div>
 
 </div>
 
 <!-- OVERLAY -->
-<div class="overlay" id="overlay">
-  <span class="close" onclick="closeOverlay()">×</span>
-  <div class="overlay-content" id="overlayContent"></div>
+
+<div class="overlay" id="overlay" onclick="closeOverlay()">
+  <span class="close" onclick="closeOverlay()">✕</span>
+  <div class="nav left" onclick="prevItem()">❮</div>
+  <div class="nav right" onclick="nextItem()">❯</div>
+  <div class="overlay-content" onclick="event.stopPropagation()" id="overlayContent"></div>
 </div>
 
 <script>
-  const items = [
+const items = [
   {src: "images/img1.jpg", text: "Sessão guitarra", type: "image"},
-  {src: "images/img2.jpg", text: "Estúdio", type: "image"},
+  {src: "images/img2.jpg", text: "Estúdio criativo", type: "image"},
   {src: "videos/video.mp4", text: "Performance ao vivo", type: "video"},
-  {src: "https://www.youtube.com/embed/SEU_VIDEO", text: "Cover", type: "youtube"}
+  {src: "https://www.youtube.com/embed/SEU_VIDEO", text: "Cover guitarra", type: "youtube"}
 ];
 
 let currentIndex = 0;
-  
-function openOverlay(src, text, type=false) {
-  const container = document.getElementById("overlayContent");
 
+function openOverlay(index) {
+  currentIndex = index;
+  renderOverlay();
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function renderOverlay() {
+  const item = items[currentIndex];
   let media = "";
 
-  if(type === true){
-    media = `<video src="${src}" controls autoplay></video>`;
-  } else if(type === 'youtube'){
-    media = `<iframe src="${src}" frameborder="0" allowfullscreen></iframe>`;
+  if(item.type === "video"){
+    media = `<video src="${item.src}" controls autoplay></video>`;
+  } else if(item.type === "youtube"){
+    media = `<iframe src="${item.src}" frameborder="0" allowfullscreen></iframe>`;
   } else {
-    media = `<img src="${src}">`;
+    media = `<img src="${item.src}">`;
   }
 
-  container.innerHTML = `
+  document.getElementById("overlayContent").innerHTML = `
     ${media}
     <div class="description">
       <h2>Projeto</h2>
-      <p>${text}</p>
+      <p>${item.text}</p>
     </div>
   `;
-
-  document.getElementById("overlay").style.display = "flex";
 }
 
 function closeOverlay() {
   document.getElementById("overlay").style.display = "none";
 }
+
+function nextItem() {
+  currentIndex = (currentIndex + 1) % items.length;
+  renderOverlay();
+}
+
+function prevItem() {
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  renderOverlay();
+}
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "ArrowRight") nextItem();
+  if(e.key === "ArrowLeft") prevItem();
+  if(e.key === "Escape") closeOverlay();
+});
 </script>
 
 </body>
