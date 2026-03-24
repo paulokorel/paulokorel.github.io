@@ -187,6 +187,15 @@ header h1 {
 </div>
 
 <script>
+  const items = [
+  {src: "images/img1.jpg", text: "Sessão guitarra", type: "image"},
+  {src: "images/img2.jpg", text: "Estúdio", type: "image"},
+  {src: "videos/video.mp4", text: "Performance ao vivo", type: "video"},
+  {src: "https://www.youtube.com/embed/SEU_VIDEO", text: "Cover", type: "youtube"}
+];
+
+let currentIndex = 0;
+  
 function openOverlay(src, text, type=false) {
   const container = document.getElementById("overlayContent");
 
