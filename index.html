@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paulo Korel - Portfólio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(10,10,10,0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  z-index: 10;
+}
+
+header-left {
+  display: flex;
+  align-items: left;
+  gap: 15px;
+  column-count: 2;
+}
+
+header img {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+header h1 {
+  font-size: 20px;
+}
+
+/*MUSIC PLAYER*/
+
+.music-player {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.music-player img {
+  width: 65px;
+  height: 65px;
+  border-radius: 8px;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+#trackName {
+  font-size: 12px;
+}
+
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: #333;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+}
+
+.controls button {
+  width: 30px;
+  height: 30px;
+  background: #333;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  margin: 8px 12px;
+}
+
+input[type=range] {
+  width: 80px;
+}
+
+/* GRID */
+.gallery {
+  column-count: 6;
+  column-gap: 12px;
+  padding: 12px;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.item img, .item video {
+  width: 100%;
+  display: block;
+  transition: 0.4s;
+}
+
+.item:hover img,
+.item:hover video {
+  transform: scale(1.05);
+}
+
+/* RESPONSIVO */
+@media (max-width: 700px) {
+  .gallery { column-count: 3; }
+  .gallery { column-gap: 8px; padding: 8px; } 
+
+header {
+  height: 70%;
+  align-items: flex-start;
+  flex-direction: column;
+  {column-count: 2;}
+} 
+
+ header-left {
+  width: 50%;
+ }
+
+ music-player {
+  width: 50%;
+  margin-top: 5px;
+ }             
+
+}
+
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+}
+
+/* conteúdo central */
+.overlay-content {
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 0px;
+  max-width: 600px;
+  width: 90%;
+  align-items: center;
+}
+
+/* mídia */
+.overlay img,
+.overlay video,
+.overlay iframe {
+  max-width: 75%;
+  border-radius: 10px;
+}
+
+/* descrição */
+  .description {
+    max-width: 20%;
+    font-size: 14px;
+  }
+
+  .nav {
+    font-size: 35px;
+    padding: 8px;
+  }
+
+/* fechar */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* setas */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  cursor: pointer;
+  color: white;
+  z-index: 1001;
+  padding: 10px;
+  user-select: none;
+}
+
+.left { left: 20px; }
+.right { right: 20px; }
+
+.gallery-wrapper {
+  position: relative;
+  max-height: 150vh;
+  overflow: hidden;
+}
+
+/* Fade out */
+.fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  margin-top: -10px; /* sobrepõe as imagens */
+
+  background: linear-gradient(to top, #0b0b0b 5%, transparent);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 40px;
+
+  z-index: 10;
+}
+
+.fade-bottom button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/*SOCIAL*/
+.socials {
+  display: flex;
+  gap: 10px;
+}
+
+.socials a {
+
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+
+.socials a:hover {
+  opacity: 1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="socials">
+  <a href="https://www.instagram.com/paulokorel/" target="_blank"><a href="#"><img src="Instagram_icon.png"></a></a>
+  <a href="https://youtube.com" target="_blank"></a>
+  <a href="https://tiktok.com" target="_blank"></a>
+</div>
+
+  <h1> PAULO KOREL </h1>
+
+<div class="music-player">
+
+  <img id="cover" src="capa-fofa.png">
+
+  <div class="player-info">
+    <div id="trackName">Música</div>
+
+    <div class="progress-container" onclick="seek(event)">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="prevTrack()">⏮</button>
+      <button onclick="togglePlay()" id="playBtn">▶</button>
+      <button onclick="nextTrack()">⏭</button>
+    </div>
+  </div>
+
+  <input type="range" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
+</div>
+
+</header>
+
+<div class="gallery-wrapper">
+
+<div class="gallery">
+
+  <div class="item" onclick="openOverlay(0)">
+<video 
+  src="TheBatman.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(1)">
+    <img src="Artboard 1.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(2)">
+    <img src="Artboard 2.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(3)">
+    <img src="Artboard 3.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(4)">
+<video 
+  src="IrisCover.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(5)">
+    <img src="Artboard 4.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(6)">
+    <img src="Artboard 5.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(7)">
+    <img src="Artboard 6.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(8)">
+<video 
+  src="PietroSantos.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>  
+
+  <div class="item" onclick="openOverlay(9)">
+  <img src="Artboard 7.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(10)">
+    <img src="Artboard 8.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(11)">
+    <img src="Artboard 9.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(12)">
+<video 
+  src="Ancestral01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(13)">
+    <img src="Artboard 10.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(14)">
+    <img src="Artboard 11.jpg" loading="lazy">
+  </div>
+  
+  <div class="item" onclick="openOverlay(15)">
+    <img src="Artboard 12.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(16)">
+<video 
+  src="Diego01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(17)">
+    <img src="Artboard 13.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(18)">
+    <img src="Artboard 14.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(19)">
+    <img src="Artboard 15.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(20)">
+<video 
+  src="Panqueca01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>    
+
+  <div class="item" onclick="openOverlay(21)">
+    <img src="Artboard 16.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(22)">
+    <img src="Artboard 17.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(23)">
+    <img src="Artboard 18.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(24)">
+<video 
+  src="Season01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(25)">
+    <img src="Artboard 19.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(26)">
+    <img src="Artboard 20.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(27)">
+    <img src="Artboard 21.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(28)">
+<video 
+  src="Jeans01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div> 
+
+  <div class="item" onclick="openOverlay(29)">
+    <img src="Artboard 22.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(30)">
+    <img src="Artboard 23.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(31)">
+    <img src="Artboard 24.jpg" loading="lazy">
+  </div>       
+
+  <div class="item" onclick="openOverlay(32)">
+<video 
+  src="Cusp01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div> 
+
+  <div class="item" onclick="openOverlay(33)">
+    <img src="Artboard 25.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(34)">
+    <img src="Artboard 26.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(35)">
+    <img src="Artboard 27.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(36)">
+<video 
+  src="HMU01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(37)">
+    <img src="Artboard 28.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(38)">
+    <img src="Artboard 29.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(39)">
+    <img src="Artboard 30.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(40)">
+<video 
+  src="Livia01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(41)">
+    <img src="Artboard 31.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(42)">
+    <img src="Artboard 32.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(43)">
+    <img src="Artboard 33.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(44)">
+<video 
+  src="Nightmare01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div>
+
+  <div class="item" onclick="openOverlay(45)">
+    <img src="Artboard 34.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(46)">
+    <img src="Artboard 35.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(47)">
+    <img src="Artboard 36.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(48)">
+<video 
+  src="Piano01.mov" 
+  muted 
+  autoplay 
+  loop 
+  playsinline
+></video>
+  </div> 
+
+  <div class="item" onclick="openOverlay(49)">
+    <img src="Artboard 37.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(50)">
+    <img src="Artboard 38.jpg" loading="lazy">
+  </div>
+
+  <div class="item" onclick="openOverlay(51)">
+    <img src="Artboard 39.jpg" loading="lazy">
+  </div>
+
+ </div>    
+
+<div class="fade-bottom">
+  <button onclick="loadMore()">Ver Mais</button>
+</div>
+
+</div>
+
+<!-- OVERLAY -->
+
+<div class="overlay" id="overlay">
+
+  <span class="close" onclick="closeOverlay()">✕</span>
+
+  <div class="nav left" onclick="prevItem(event)">❮</div>
+  <div class="nav right" onclick="nextItem(event)">❯</div>
+
+  <div class="overlay-content" id="overlayContent"></div>
+
+</div>
+
+<script>
+
+let startX = 0;
+
+document.getElementById("overlay").addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+document.getElementById("overlay").addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (startX - endX > 50) nextItem(e);   // swipe esquerda
+  if (endX - startX > 50) prevItem(e);   // swipe direita
+});
+
+let wasPlayingBeforeVideo = false;
+
+const items = [
+  {src: "TheBatman.mov", text: "Iris Cover", type: "video"}, /* 0 */
+  {src: "Artboard 1.jpg", text: 
+  "<center><h3>Ensaio Urbano</h3><p><h4>Modelo Isabelly</h4></p></center>"
+  , type: "image"}, /* 1 */
+  {src: "Artboard 2.jpg", text:
+  "<center><h3>Ensaio Urbano</h3><p><h4>Modelo Jefferson</h4></p></center>"
+  , type: "image"}, /* 2 */
+  {src: "Artboard 3.jpg", text:
+  "<center><h3>Ensaio Feminino</h3><p><h4>Modelo Juliana</h4></p></center>"
+  , type: "image"}, /* 3 */
+  {src: "IrisCover.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance Cover - Iris</h4></p></center>"
+  , type: "video"}, /* 4 */
+  {src: "Artboard 4.jpg", text:
+  "<center><h3>Ensaio Masculino</h3><p><h4>Personal Diego</h4></p></center>"
+  , type: "image"}, /* 5 */
+  {src: "Artboard 5.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresária Luma</h4></p></center>"
+  , type: "image"}, /* 6 */
+  {src: "Artboard 6.jpg", text:
+  "<center><h3>Ensaio Sensual</h3><p><h4>Modelo Bruna</h4></p></center>"
+  , type: "image"}, /* 7 */
+  {src: "PietroSantos.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Influencer Pietro Santos</h4></p></center>"
+  , type: "video"}, /* 8 */
+  {src: "Artboard 7.jpg", text:
+  "<center><h3>Ensaio Moda</h3><p><h4>Modelo Evellyn</h4></p></center>"
+  , type: "image"}, /* 9 */
+  {src: "Artboard 8.jpg", text:
+  "<center><h3>Esaio Business</h3><p><h4>Empresária Anna</h4></p></center>"
+  , type: "image"}, /* 10 */
+  {src: "Artboard 9.jpg", text:
+  "<center><h3>Ensaio Feminino</h3><p><h4>Empresária Lívia</h4></p></center>"
+  , type: "image"}, /* 11 */
+  {src: "Ancestral01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance Cover - Ancestral</h4></p></center>"
+  , type: "video"}, /* 12 */
+  {src: "Artboard 10.jpg", text:
+  "<center><h3>Ensaio Sensual</h3><p><h4>Modelo Geovanna</h4></p></center>"
+  , type: "image"}, /* 13 */
+  {src: "Artboard 11.jpg", text:
+  "<center><h3>Ensaio Masculino</h3><p><h4>Rapper Renan 'Dellas'</h4></p></center>"
+  , type: "image"}, /* 14 */
+  {src: "Artboard 12.jpg", text:
+  "<center><h3>Foto Produto</h3><p><h4>Suplemento - Lauton</h4></p></center>"
+  , type: "image"}, /* 15 */
+  {src: "Diego01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Personal Diego</h4></p></center>"
+  , type: "video"}, /* 16 */
+  {src: "Artboard 13.jpg", text:
+  "<center><h3>Ensaio Infantil</h3><p><h4>Modelo Larissa</h4></p></center>"
+  , type: "image"}, /* 17 */
+  {src: "Artboard 14.jpg", text:
+  "<center><h3>Ensaio Feminino</h3><p><h4>Modelo Juliana</h4></p></center>"
+  , type: "image"}, /* 18 */
+  {src: "Artboard 15.jpg", text:
+  "<center><h3>Ensaio Dupla Sertaneja</h3><p><h4>Dupla Leone & Leonardo</h4></p></center>"
+  , type: "image"}, /* 19 */
+  {src: "Panqueca01.mov", text:
+  "<center><h3>Produção Institucional</h3><p><h4>Reel de Receita</h4></p></center>"
+  , type: "video"}, /* 20 */
+  {src: "Artboard 16.jpg", text:
+  "<center><h3>Ensaio Gourmet</h3><p><h4>Burrito Mexicano</h4></p></center>"
+  , type: "image"}, /* 21 */
+  {src: "Artboard 17.jpg", text:
+  "<center><h3>Ensaio Dupla Sertaneja</h3><p><h4>Dupla Leone & Leonardo</h4></p></center>"
+  , type: "image"}, /* 22 */
+  {src: "Artboard 18.jpg", text:
+  "<center><h3>Ensaio Gourmet</h3><p><h4>Receita de Bolo Blueberry</h4></p></center>"
+  , type: "image"}, /* 23 */
+  {src: "Season01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Restaurante Seasons</h4></p></center>"
+  , type: "video"}, /* 24 */
+  {src: "Artboard 19.jpg", text:
+  "<center><h3>Ensaio Urbano</h3><p><h4>Influencer - Pietro Santos</h4></p></center>"
+  , type: "image"}, /* 25 */
+  {src: "Artboard 20.jpg", text:
+  "<center><h3>Ensaio Urbano</h3><p><h4>Modelo Isabelly</h4></p></center>"
+  , type: "image"}, /* 26 */
+  {src: "Artboard 21.jpg", text:
+  "<center><h3>Ensaio Infantil</h3><p><h4>Modelo - Henriquinho</h4></p></center>"
+  , type: "image"}, /* 27 */
+  {src: "Jeans01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Empresária Laine</h4></p></center>"
+  , type: "video"}, /* 28 */
+  {src: "Artboard 22.jpg", text:
+  "<center><h3>Ensaio Produto</h3><p><h4>Suplemento Lauton</h4></p></center>"
+  , type: "image"}, /* 29 */
+  {src: "Artboard 23.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresária Lívia</h4></p></center>"
+  , type: "image"}, /* 30 */
+  {src: "Artboard 24.jpg", text:
+  "<center><h3>Ensaio Moda</h3><p><h4>Modelo Evellyn</h4></p></center>"
+  , type: "image"}, /* 31 */
+  {src: "Cusp01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance Cover - Cusp of Eternity</h4></p></center>"
+  , type: "video"}, /* 32 */
+  {src: "Artboard 25.jpg", text:
+  "<center><h3>Ensaio Infantil</h3><p><h4>Modelo Fernanda</h4></p></center>"
+  , type: "image"}, /* 33 */
+  {src: "Artboard 26.jpg", text:
+  "<center><h3>Ensaio Urbano</h3><p><h4>Shatista Leandro</h4></p></center>"
+  , type: "image"}, /* 34 */
+  {src: "Artboard 27.jpg", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance Cover - Iris</h4></p></center>"
+  , type: "image"}, /* 35 */
+  {src: "HMU01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Reel - Hot MakeUp</h4></p></center>"
+  , type: "video"}, /* 36 */
+  {src: "Artboard 28.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresária Luma</h4></p></center>"
+  , type: "image"}, /* 37 */
+  {src: "Artboard 29.jpg", text:
+  "<center><h3>Ensaio Sensual</h3><p><h4>Modelo Sabrina</h4></p></center>"
+  , type: "image"}, /* 38 */
+  {src: "Artboard 30.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresário Lázaro</h4></p></center>"
+  , type: "image"}, /* 39 */
+  {src: "Livia01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Reel - Livia</h4></p></center>"
+  , type: "video"}, /* 40 */
+  {src: "Artboard 31.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Cirurgião Plástico - Gustavo</h4></p></center>"
+  , type: "image"}, /* 41 */
+  {src: "Artboard 32.jpg", text: 
+  "<center><h3>Ensaio Business</h3><p><h4>Massoterapeuta</h4></p></center>"
+  , type: "image"}, /* 42 */
+  {src: "Artboard 33.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresária Anna</h4></p></center>"
+  , type: "image"}, /* 43 */
+  {src: "Nightmare01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance Cover - Nightmare</h4></p></center>"
+  , type: "video"}, /* 44 */
+  {src: "Artboard 34.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresário Lázaro</h4></p></center>"
+  , type: "image"}, /* 45 */
+  {src: "Artboard 35.jpg", text:
+  "<center><h3>Ensaio Produto</h3><p><h4>Calça Jeans</h4></p></center>"
+  , type: "image"}, /* 46 */
+  {src: "Artboard 36.jpg", text:
+  "<center><h3>Ensaio Urbano</h3><p><h4>Modelo Isabelly</h4></p></center>"
+  , type: "image"}, /* 47 */
+  {src: "Piano01.mov", text:
+  "<center><h3>Produção Audiovisual</h3><p><h4>Performance de Piano</h4></p></center>"
+  , type: "video"}, /* 48 */
+  {src: "Artboard 37.jpg", text:
+  "<center><h3>Ensaio Business</h3><p><h4>Empresária Luma</h4></p></center>"
+  , type: "image"}, /* 49 */
+  {src: "Artboard 38.jpg", text:
+  "<center><h3>Ensaio Masculino</h3><p><h4>Personal Diego</h4></p></center>"
+  , type: "image"}, /* 50 */
+  {src: "Artboard 39.jpg", text:
+  "<center><h3>Ensaio Business/h3><p><h4>Modelo Jefferson</h4></p></center>"
+  , type: "image"}, /* 51 */
+
+];
+
+let currentIndex = 0;
+
+function openOverlay(index) {
+  currentIndex = index;
+  renderOverlay();
+
+  document.getElementById("overlay").style.display = "flex";
+}
+
+function renderOverlay() {
+  const item = items[currentIndex];
+  let media = "";
+
+function pauseMusicForVideo() {
+  if (isPlaying) {
+    wasPlayingBeforeVideo = true;
+    fadeOut();
+  } else {
+    wasPlayingBeforeVideo = false;
+  }
+}
+
+  if(item.type === "video"){
+  pauseMusicForVideo();
+    media = `<video src="${item.src}" controls autoplay></video>`;
+  } else if(item.type === "youtube"){
+    media = `<iframe src="${item.src}" frameborder="0" allowfullscreen></iframe>`;
+  } else {
+    media = `<img src="${item.src}">`;
+  }
+
+  document.getElementById("overlayContent").innerHTML = `
+    ${media}
+    <div class="description">
+      <h2></h2>
+      <p>${item.text}</p>
+    </div>
+  `;
+}
+
+function closeOverlay() {
+      resumeMusicAfterVideo();
+
+  const container = document.getElementById("overlayContent");
+
+  // pausa TODOS vídeos
+  container.querySelectorAll("video").forEach(v => {
+    v.pause();
+    v.currentTime = 0;
+  });
+
+  container.innerHTML = "";
+  document.getElementById("overlay").style.display = "none";
+
+
+}
+
+function nextItem(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % items.length;
+  renderOverlay();
+}
+
+function prevItem(e) {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  renderOverlay();
+}
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "ArrowRight") nextItem();
+  if(e.key === "ArrowLeft") prevItem();
+  if(e.key === "Escape") closeOverlay();
+});
+
+const tracks = [
+  {
+    src: "05 Ressureição 06 Paraíso.wav",
+    name: "Ressureição e Paraíso - Trilha Sonora Original do Curta-Metragem 'FOFA' por Paulo Korel",
+    cover: "capa-fofa.png"
+  },
+  {
+    src: "Meu Processo é o Outro (Olga Kos).wav",
+    name: "Meu Processo é o Outro - Trilha Sonora Original do Projeto - ONDA #15 Atraves.tv",
+    cover: "capa-atraves.png"
+  },
+  {
+    src: "A Vida é uma Só (Patrícia Celanti).wav",
+    name: "A Vida é uma Só - Trilha Sonora Original do Projeto - ONDA #15 Atraves.tv",
+    cover: "capa-atraves.png"
+  }  
+];
+
+let audio = new Audio();
+let currentTrack = 0;
+let isPlaying = false;
+
+const playBtn = document.getElementById("playBtn");
+const trackName = document.getElementById("trackName");
+const cover = document.getElementById("cover");
+const progress = document.getElementById("progress");
+
+function loadTrack(index) {
+  audio.src = tracks[index].src;
+  trackName.innerText = tracks[index].name;
+  cover.src = tracks[index].cover;
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    fadeOut();
+  } else {
+    audio.play();
+    fadeIn();
+    playBtn.innerText = "⏸";
+  }
+  isPlaying = !isPlaying;
+}
+
+function nextTrack() {
+  currentTrack = (currentTrack + 1) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+  fadeIn();
+  playBtn.innerText = "⏸";
+  isPlaying = true;
+}
+
+function prevTrack() {
+  currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+  loadTrack(currentTrack);
+  audio.play();
+  fadeIn();
+  playBtn.innerText = "⏸";
+  isPlaying = true;
+}
+
+/* PROGRESSO */
+audio.ontimeupdate = () => {
+  const percent = (audio.currentTime / audio.duration) * 100;
+  progress.style.width = percent + "%";
+};
+
+function seek(e) {
+  const width = e.currentTarget.clientWidth;
+  const clickX = e.offsetX;
+  audio.currentTime = (clickX / width) * audio.duration;
+}
+
+/*SHUFFLE */
+function shuffleItems() {
+  const gallery = document.querySelector(".gallery");
+  const items = Array.from(gallery.querySelectorAll(".item"));
+
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+
+  items.forEach(item => gallery.appendChild(item));
+}
+
+function reshuffle() {
+  shuffleItems();
+}
+
+/*FADE*/
+function loadMore() {
+  shuffleItems();
+
+  // sobe suavemente
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+/* VOLUME */
+function setVolume(val) {
+  audio.volume = val;
+}
+
+/* FADE */
+function fadeIn() {
+  audio.volume = 0;
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 1) {
+      vol += 0.05;
+      audio.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 50);
+}
+
+function fadeOut() {
+  let vol = audio.volume;
+  const fade = setInterval(() => {
+    if (vol > 0) {
+      vol -= 0.05;
+      audio.volume = vol;
+    } else {
+      clearInterval(fade);
+      audio.pause();
+      playBtn.innerText = "▶";
+    }
+  }, 50);
+}
+
+/* INTEGRAÇÃO COM VÍDEO */
+function resumeMusicAfterVideo() {
+  if (wasPlayingBeforeVideo) {
+    audio.play();
+    fadeIn();
+    playBtn.innerText = "⏸";
+    isPlaying = true;
+  }
+}
+/* INIT */
+loadTrack(currentTrack);
+
+</script>
+
+</body>
+</html>
